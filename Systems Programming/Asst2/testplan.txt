@@ -1,0 +1,11 @@
+/* CS 214: Systems Programming Spring 2018
+ *  Professor Francisco
+ *  Assignment 2: Keyspace Construction
+ *  Richard Farrington netid: raf172
+ *  Anirudh Tunoori netid: at813
+ */
+
+			testplan.txt
+{a single tester file, a directory containing multiple subdirectories and files (0-9)}
+
+In our test process, we built a directory containing multiple test files and subdirectories. This is so we could test our programs effectiveness in traversing/processing multiple files and directories. We also varied the sizes (amount of content) of each file. We included empty directories and files in order to ensure that our program does not panic or terminate prematurely. We included test files with no alphanumeric characters along with test files that contained a song, one with the bill of rights and test files with long strings designed to stress our buffer capacities. We also included a single testfile outside our directory of test files in order to ensure that our program can process a single file. This varied testing approach allowed us to expose our program to different conditions.

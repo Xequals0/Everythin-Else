@@ -1,0 +1,14 @@
+/* CS 214: Systems Programming Spring 2018
+ *  Professor Francisco
+ *  Assignment 1: To Build A Better Malloc
+ *  Richard Farrington netid: raf172
+ *  Anirudh Tunoori netid: at813
+ */
+				//TEST PLAN//
+The following details workloads E and F including their design, implementations, and general findings:
+
+Workload E:
+Workload E involved a nested loop process wherein a 1000 iterations of dynamic memory allocation/freeing occurs. At each iteration a call to malloc() was made; the size of which depends on the current iteration and the bytes allocated are stored in an array of size 1000. As the iterations proceed, at each step an additional one byte is allocated to each array index and immediately free with progressive iterations allocating and freeing the additional byte. This workload is designed to rigorously test the functionality of mymalloc and myfree by increasing the amount of memory being allocated. The later cycles take a longer amount of time (thereby increasing the mean runtime of the workload). Workload E has by far the highest mean runtime compared to all the other workloads, averaging 450000 microseconds. We also noticed that the longer the workload cycles ran the longer workload E took. For instance, there was a slowdown that begins around the 70th iteration that takes progressively longer around the 90-100th iterations. This may be surprising, since the amount of work/steps in each cycle are the same.
+
+Workload F:
+Similar to Workload E, Workload F also uses an array to store pointers to memory allocated by malloc() calls. Workload F also operates under 1000 iterations per cycle. But instead of a nested process, this workload operates similarly to Workload A. During each iteration, the array holds the bytes returned by a malloc() call for i bytes; where i depends on the current iteration (0-1000), the allocated bytes are immediately free. For each cycle of Workload F, each array index is used once (is only reused at the start of the next cycle). On average, the mean run time of this workload is 1000 microseconds. We felt that this was a useful workload because it afforded us the opportunity to compare it with other workloads, particularly with workload A, whose mean runtime averages around 10 microseconds. Theoretically Workload F works within an order of 1000 more than A. However we also noticed that the order of the workloads makes a difference in the runtime. We noticed for instance that since F is preceded by E (the longest mean runtime by a factor of 500), workload F takes an extra amount of time to run then it would if it say proceeded workload B. We also noticed that like all the other workloads, as the number of cycles approaches 100, the longer each workload runs. It is important to not that it is solely Workload E that takes significantly longer with more cycles. 

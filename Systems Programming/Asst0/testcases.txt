@@ -1,0 +1,768 @@
+/* CS 214: Systems Programming Spring 2018
+*  Professor Francisco
+*  Assignment 0: String Sorting TEST CASES
+*  Richard Farrington netid: raf172
+*  Anirudh Tunoori netid: at813
+*/
+TEST CASES
+1. Input: nothing
+   Expected output: usage string
+   Actual Output: Usage: ./stringsorter "Enter (a single) Input String Here"
+   Reason for using this case: precautionary test case; should give the user a usage string
+2. Input: “”
+   Expected output: nothing
+   Actual Output: nothing
+   Reason for using this case: testing the input of an empty string; as specified by the project specifications this should return nothing
+3. Input: “gh” “gh”
+   Expected output: usage string
+   Actual Output: Usage: ./stringsorter "Enter (a single) Input String Here"
+   Reason for using this case: Exceeded the number of accepted arguments should give the user a usage string
+4. Input: hello world
+   Expected output: usage string
+   Actual Output: Usage: ./stringsorter "Enter (a single) Input String Here"
+   Reason for using this case: Exceeded the number of accepted arguments as the input is not given in “”
+5. Input: "123Hello$$World 123"
+   Expected output: Hello
+		    World
+   Actual Output: Hello
+		  World
+   Reason for using this case: Testing for non-letter characters before between and after words, including a space
+6. Input: " 121314283    476864837 ,. '[]\()^% @ "
+   Expected output: nothing
+   Actual Output: nothing
+   Reason for using this case: Testing for an only non-letter input; including numbers special characters and irregular spacing
+7. Input: “Nitwit Blubber Oddment Tweak”
+   Expected output: 
+	Blubber
+	Nitwit
+	Oddment
+	Tweak
+   Actual Output:
+	Blubber
+	Nitwit
+	Oddment
+	Tweak
+   Reason for using this case: Testing for a standard/regular input
+8. Input: “aand, aAnd, Aand, AAnd”
+   Expected output: 
+	AAnd
+ 	Aand
+ 	aAnd
+ 	aand
+   Actual Output:
+	AAnd
+ 	Aand
+ 	aAnd
+ 	aand
+   Reason for using this case: Experimenting with different cases: upper/lower
+9. Input: "Zam borp nUtter butter Frobozz blab brop Frobozz hello10293810293out*0192^there10091"
+   Expected output: 
+	Frobozz
+	Frobozz
+	Zam
+	blab
+	borp
+	brop
+	butter
+	hello
+	nUtter
+	out
+	there
+   Actual Output:
+	Frobozz
+	Frobozz
+	Zam
+	blab
+	borp
+	brop
+	butter
+	hello
+	nUtter
+	out
+	there
+   Reason for using this case: Testing the cases given in class
+10. Input: "appE appe appz apZpa Zaap zapp Appz Appp app appa appb mapp pap "
+   Expected output: 
+	Appp
+	Appz
+	Zaap
+	apZpa
+	app
+	appE
+	appa
+	appb
+	appe
+	appz
+	mapp
+	pap
+	zapp
+   Actual Output:
+	Appp
+	Appz
+	Zaap
+	apZpa
+	app
+	appE
+	appa
+	appb
+	appe
+	appz
+	mapp
+	pap
+	zapp
+   Reason for using this case: Miscellaneous test case
+11. Input: "As they rounded a bend in the path that ran beside the river, Lara recognized the silhouette of a fig tree atop a nearby hill. The weather was hot and the days were long. The fig tree was in full leaf, but not yet bearing fruit.
+Soon Lara spotted other landmarks an outcropping of limestone beside the path that had a silhouette like a man’s face, a marshy spot beside the river where the waterfowl were easily startled, a tall tree that looked like a man with his arms upraised. They were drawing near to the place where there was an island in the river. The island was a good spot to make camp. They would sleep on the island tonight."
+   Expected output: 
+	As
+	Lara
+	Lara
+	Soon
+	The
+	The
+	The
+	They
+	They
+	a
+	a
+	a
+	a
+	a
+	a
+	a
+	a
+	a
+	an
+	an
+	and
+	arms
+	atop
+	bearing
+	bend
+	beside
+	beside
+	beside
+	but
+	camp
+	days
+	drawing
+	easily
+	face
+	fig
+	fig
+	fruit
+	full
+	good
+	had
+	hill
+	his
+	hot
+	in
+	in
+	in
+	island
+	island
+	island
+	landmarks
+	leaf
+	like
+	like
+	limestone
+	long
+	looked
+	make
+	man
+	man
+	marshy
+	near
+	nearby
+	not
+	of
+	of
+	on
+	other
+	outcropping
+	path
+	path
+	place
+	ran
+	recognized
+	river
+	river
+	river
+	rounded
+	s
+	silhouette
+	silhouette
+	sleep
+	spot
+	spot
+	spotted
+	startled
+	tall
+	that
+	that
+	that
+	the
+	the
+	the
+	the
+	the
+	the
+	the
+	the
+	the
+	the
+	there
+	they
+	to
+	to
+	tonight
+	tree
+	tree
+	tree
+	upraised
+	was
+	was
+	was
+	was
+	waterfowl
+	weather
+	were
+	were
+	were
+	where
+	where
+	with
+	would
+	yet
+   Actual Output:
+	As
+	Lara
+	Lara
+	Soon
+	The
+	The
+	The
+	They
+	They
+	a
+	a
+	a
+	a
+	a
+	a
+	a
+	a
+	a
+	an
+	an
+	and
+	arms
+	atop
+	bearing
+	bend
+	beside
+	beside
+	beside
+	but
+	camp
+	days
+	drawing
+	easily
+	face
+	fig
+	fig
+	fruit
+	full
+	good
+	had
+	hill
+	his
+	hot
+	in
+	in
+	in
+	island
+	island
+	island
+	landmarks
+	leaf
+	like
+	like
+	limestone
+	long
+	looked
+	make
+	man
+	man
+	marshy
+	near
+	nearby
+	not
+	of
+	of
+	on
+	other
+	outcropping
+	path
+	path
+	place
+	ran
+	recognized
+	river
+	river
+	river
+	rounded
+	s
+	silhouette
+	silhouette
+	sleep
+	spot
+	spot
+	spotted
+	startled
+	tall
+	that
+	that
+	that
+	the
+	the
+	the
+	the
+	the
+	the
+	the
+	the
+	the
+	the
+	there
+	they
+	to
+	to
+	tonight
+	tree
+	tree
+	tree
+	upraised
+	was
+	was
+	was
+	was
+	waterfowl
+	weather
+	were
+	were
+	were
+	where
+	where
+	with
+	would
+	yet
+   Reason for using this case: A small paragraph; serves to test the dynamic allocation.
+12. Input: " Compar763428ing the algorithms for sorting and median-finding we notice that, beyond the com- mon divide-and-conquer philosophy and stru:Dcture, they are exact opposites. Mergesort 54768splits the array in two in the most convenient way (first half, second half), without anXDy reg][]][ard to the magnitudes of the eleD):Dments in each half but then it works hard to put th:De sorted sub- arrays to<g<e<ther. In contrast, the m\\\edia///n algorithm is careful about its sp’]lit>>>>>>||ting (smaller numbers first, then the larger ones), but its work ends with the recursive call.
+Qui48763cksort is a sorting algorithm that s:plits the array in exactly the same way as the me- dian algorithm; and once the subarrays are sorted, by two recursive calls, there 45387 nothing more to   do. Its worst-case perform     9 ( ance is Θ(n2), l:))))))hat of median-finding. But it can be proved (Exercise 2.24) that its average case is O(n log n); furthermore, empirically it outper- forms other sorting algorithms. This has made quicksort a …..favorite in m,,,,,any applications— for instance, it is the basis of the code by which really enormous files are sorted."
+   Expected output: 
+But
+Compar
+Dcture
+De
+Dments
+Exercise
+In
+Its
+Mergesort
+O
+Qui
+This
+a
+a
+about
+algorithm
+algorithm
+algorithm
+algorithms
+algorithms
+anXDy
+ance
+and
+and
+and
+and
+any
+applications
+ard
+are
+are
+are
+array
+array
+arrays
+as
+average
+basis
+be
+beyond
+but
+but
+by
+by
+call
+calls
+can
+careful
+case
+case
+cksort
+code
+com
+conquer
+contrast
+convenient
+dian
+divide
+do
+e
+each
+edia
+eleD
+empirically
+ends
+enormous
+exact
+exactly
+favorite
+files
+finding
+finding
+first
+first
+for
+for
+forms
+furthermore
+g
+half
+half
+half
+hard
+has
+hat
+in
+in
+in
+in
+in
+ing
+instance
+is
+is
+is
+is
+is
+it
+it
+it
+it
+its
+its
+its
+l
+larger
+lit
+log
+m
+m
+made
+magnitudes
+me
+median
+median
+mon
+more
+most
+n
+n
+n
+n
+nothing
+notice
+numbers
+of
+of
+of
+once
+ones
+opposites
+other
+outper
+perform
+philosophy
+plits
+proved
+put
+quicksort
+really
+recursive
+recursive
+reg
+s
+same
+second
+smaller
+sorted
+sorted
+sorted
+sorting
+sorting
+sorting
+sp
+splits
+stru
+sub
+subarrays
+th
+that
+that
+that
+the
+the
+the
+the
+the
+the
+the
+the
+the
+the
+the
+the
+the
+the
+the
+then
+then
+ther
+there
+they
+ting
+to
+to
+to
+to
+two
+two
+way
+way
+we
+which
+with
+without
+work
+works
+worst
+   Actual Output: 
+But
+Compar
+Dcture
+De
+Dments
+Exercise
+In
+Its
+Mergesort
+O
+Qui
+This
+a
+a
+about
+algorithm
+algorithm
+algorithm
+algorithms
+algorithms
+anXDy
+ance
+and
+and
+and
+and
+any
+applications
+ard
+are
+are
+are
+array
+array
+arrays
+as
+average
+basis
+be
+beyond
+but
+but
+by
+by
+call
+calls
+can
+careful
+case
+case
+cksort
+code
+com
+conquer
+contrast
+convenient
+dian
+divide
+do
+e
+each
+edia
+eleD
+empirically
+ends
+enormous
+exact
+exactly
+favorite
+files
+finding
+finding
+first
+first
+for
+for
+forms
+furthermore
+g
+half
+half
+half
+hard
+has
+hat
+in
+in
+in
+in
+in
+ing
+instance
+is
+is
+is
+is
+is
+it
+it
+it
+it
+its
+its
+its
+l
+larger
+lit
+log
+m
+m
+made
+magnitudes
+me
+median
+median
+mon
+more
+most
+n
+n
+n
+n
+nothing
+notice
+numbers
+of
+of
+of
+once
+ones
+opposites
+other
+outper
+perform
+philosophy
+plits
+proved
+put
+quicksort
+really
+recursive
+recursive
+reg
+s
+same
+second
+smaller
+sorted
+sorted
+sorted
+sorting
+sorting
+sorting
+sp
+splits
+stru
+sub
+subarrays
+th
+that
+that
+that
+the
+the
+the
+the
+the
+the
+the
+the
+the
+the
+the
+the
+the
+the
+the
+then
+then
+ther
+there
+they
+ting
+to
+to
+to
+to
+two
+two
+way
+way
+we
+which
+with
+without
+work
+works
+worst
+
+Reason for using this case: A paragraph with a lot of random non-letter characters interspersed within
+
+
+
+
