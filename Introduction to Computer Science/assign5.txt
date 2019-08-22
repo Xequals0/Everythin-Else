@@ -1,0 +1,248 @@
+Assignment 5
+Anirudh Tunoori
+NetID:at813
+Section: 3
+
+Problem 1
+ 
+
+Trace selection sort on the following array of letters (sort into alphabetical order):
+M U E J R Q X B
+After each pass (outer loop iteration) of selection sort, 
+show the contents of the array and 
+the number of letter-to-letter comparisons performed on that pass.
+
+Selection Sort:
+
+	Contents:		# of letter-to-letter comparisons:
+0. [M U E J R Q X|B|]				7*
+1. [B U|E|J R Q X M]				6
+2. [B E U|J|R Q X M]				5
+3. [B E J U R Q X|M|]				4
+4. [B E J M R|Q| X U]				3
+5. [B E J M Q|R| X U]				2
+6. [B E J M Q R X|U|]				1
+7. [B E J M Q R U|X|]				0; all elements have been sorted…
+
+/*In the zeroth pass the algorithm makes N-1 (or 7) comparisons in order to find the smallest in the array
+with each additional pass the algorithm makes one less comparison in order to find the new minimum among the unsorted elements.
+I used |letter| to indicate the new minimum found by the algorithm for that pass.
+*/
+
+Trace insertion sort on the following array of letters (sort into alphabetical order):
+M U E J R Q X B
+After each pass (outer loop iteration) of insertion sort, 
+show the contents of the array and 
+the number of letter-to-letter comparisons performed on that pass.
+
+Insertion Sort:
+
+	Contents:		# of letter-to-letter comparisons:
+1. [M|U E J R Q X B]				0
+2. [M U|E J R Q X B]				1
+3. [E M U|J R Q X B]				2
+4. [E J M U|R Q X B]				3
+5. [E J M R U|Q X B]				2
+6. [E J M Q R U|X B]				3
+7. [E J M Q R U X|B]				1
+8. [B E J M Q R U X|]				7; all elements have been sorted…
+_____________________________________________________________________________________
+
+Problem 2
+
+For each problems segment given below, do the following:
+
+Create an algorithm to solve the problem
+
+Identify the factors that would influence the running time, and which can be known before the algorithm or code is executed. Assign names (such as n) to each factor.
+
+Identify the operations that must be counted. You need not count every statement separately. If a group of statements always executes together, treat the group as a single unit. If a method is called, and you do not know the running time of that method, count it as a single operation.
+
+Count the operations performed by the algorithm or code. Express the count as a function of the factors you identified in Step 2. If the count cannot be expressed as a simple function of those factors, define the bounds that can be placed on the count: the best case (lower bound) and worst case (upper bound).
+
+Determine what the Best Case Inputs are, and the Worst Case Inputs are, and the efficiency of your implementation
+
+Transform your count formula into big-O notation by:
+Taking the efficiency with worst case input,
+Dropping insignificant terms.
+Dropping constant coefficients.
+
+a. Determine if 2 arrays contain the same elements
+
+Algorithm (pseudocode):
+1.let array1 be the first array and array2 be the second array
+both arrays have been initialized.
+datatype [] array1 = {…};
+datatype [] array2 = {…};
+
+2. Check the length condition to see if arrays are of the same dimension:
+condition: if(array1.length == array2.length){ //continue…}
+IF this condition fails, out put that although these two arrays are not of the sam size they may
+still contain the same elements(in the even of duplicates). Continue the algorithm.
+
+3.Go through each element in array1 and compare it with each element in array2.
+Use two loops to accomplish this:
+loop1 (cycles through the elements in array1)iterates n times, where n = array1.length
+	within loop one is a second (nested) loop.
+loop2 (cycles through the elements in array2)iterates k times, where k = array2.length
+	within loop2 is the comparison structure:
+	if(array1[i]==array2[k])
+		noMatch = false; //continue the loop
+	//at least one similar element
+	
+	if(noMatch) return false; // this portion is outside loop 2 but within loop one.
+	// reset no Match for the next iteration of loop 1 —> noMatch = true;
+//continue through both loops in this manner and determine if the arrays match.
+if the 2 arrays contain the same elements return true —> if(!noMatch)
+
+Detailed Steps:
+
+1.Pick the first element in array1 and compare it with the first element in array2.
+2.If the two elements are the same there is at least one similar element. 
+Proceed and compare the first element in array1 with the next/consecutive element in array2.
+3.Continue the comparison: array1[0], with all the elements in array2 in order.
+4. Take the next element in array1 and repeat steps 1-3; until array1[1] is compared with every element in array 2.
+5. Continue step 4 until all of the elements in array1 have completed their respective comparisons.
+
+Influential Factors:
+The size of the first array -> N1
+The size of the second array -> N2
+*These are the only two factors that can be known BEFORE the algorithm is executed.
+
+Identify Operations:
+OP!: check/compare the dimensions of the two arrays. This operation is executed once
+OP2: Loop1; this operation is iterated n times, where n = array1.length.
+OP3: Loop2; this operation is iterated k times, where k = array2.length.
+OP4: comparison operation; this operation is executed such that each element in array1 is compared with each element in array2. (n*k)
+OP5: Determine noMatch, and !noMatch and return false or true respectively.
+OP6: Reset noMatch to true (note OP 6 is conducted between OP5 in the sense that true is only returned after 
+both loops have finished while op6 is run with each iteration of loop1)
+
+Count the operations: 
+OP1: 1
+OP2: N
+OP3: N (expressed in the same order as OP2)
+OP4: 1 (assuming both arrays are of the same dimension)
+OP5: N-1 times
+OP6: 1
+
+Best Case, Worst Case, and Efficiency:
+This algorithm has a strange efficiency; It assumes no matches with each iteration of the loop 
+until it is determined that these arrays have the same elements.
+Thus, the worst case occurs if the algorithm occurs if all the elements are processed hence ascertaining that the 2 arrays contain the same elements
+Best case: N + 1
+Worst case: N^2 + N + 2
+Find the Asymptotic Notation:
+O(n) = N^2
+
+
+b. Counting total number characters that have a duplicate within a string
+
+Algorithm (pseudocode):
+
+Create an output String that will output the duplicates and their respective counts.(at the end)
+String output = “”; int count = 0; String a = “”; String s = “”;
+In a loop go through each character. The loop will iterate N times where N is the number of characters in the string.
+within the loop have a substring s that equals input.substring(position, position)
+this loop will go through each letter
+String a = input.Substring(pos,pos)
+In a second loop compare the current letter with each remaining letter in the String.
+
+//compare a to s
+	if (a.equals(s))
+	count++;
+Once this (inner) loop has run add the repeated character if(count!=0)
+output+= a + count + “ ”;
+and the count to the output.
+Then, remove this character from the string using a replace method: input.replaceAll(a,””);
+Decrement(if necessary) The number of iterations N, to N = input.length();
+End outer loop
+output or return the output String
+
+Influential Factors:
+The length of the String-> N
+*This is the only factor that can be known BEFORE the algorithm is executed.
+
+Identify Operations:
+OP1: initial declarations
+OP2: loop1; goes through the entire String character by character… It should be noted that the size of the String and hence the number
+of iterations will be variable and dependent on the # of repeated characters.
+OP3: loop2; Go through each remaining character in the input String.
+OP4: Conduct the comparisons 
+OP5: increment count when necessary
+OP6: add to the output String if count!= 0
+OP7: Replace all method
+OP8: Decrement/modify N
+OP9: Output the output String
+
+Count the operations:
+OP1: 4 (probably a lot less)
+OP2: Best case: 1 (the entire String consists of one repeating character), Worst Case: N
+OP3: N //N can change with each iteration but regardless of N’s value this operation will be conducted N times
+OP4: Best case: N (the entire String consists of one repeating character), Worst Case: N^2
+OP5: Best case: 0, Worst Case: N (the entire String consists of one repeating character)
+OP6: 1 < and < 2 
+OP7: Replace all method: 1 if executed, 0 if not.
+OP8: Best case: 0, Worst Case: 1 (the character repeats at least once).
+OP9: 1
+
+Best Case, Worst Case, and Efficiency:
+(see above^)
+Best: 4 + 1+N+N+N+ 2 +1 +2 = 3N + 10
+Worst: 4+ N+N+N^2+1+0+1 = 6+2N+N^2
+Find the Asymptotic Notation:
+O(n) = N^2
+// for N< 3 it just so happens that the worst case is better than the best case
+
+c. Finding an empty row in a 2-D array where empty is defined as an element with a 0 entry.
+
+Algorithm (pseudocode):
+
+Get the number of rows in the array:
+int rows = a.length;
+(Use) boolean isEmpty = false; //to return a result
+loop one: processes all the rows in array a; runs rows number of times
+	loop two: goes through each element in the row: a[r][c] where r is the row number and c is the column (runs a[r].length times)
+	For each element run a comparison and check (a[r][c] == 0)
+	If the comparison does not result in true, break out of the inner loop and proceed with the next row.
+Outside loop two : if(c == a[r].length) isEmpty = true;
+else isEmpty = false;
+Outside both loops: return isEmpty;
+
+Influential Factors:
+The only influential factor would be the size of this 2-D array; it is the only thing that can be determined before
+the algorithm is executed.
+The size is dependent on the number of elements or the number of rows and columns
+numRows-> R or a.length;
+numCollumns-> C or a[R].length;
+aSize = R*C;
+
+Identify Operations:
+OP1: initialize the number of rows and the isEmpty variable
+OP2: Iterate through loop1 rows number of times unless isEmpty is evaluated to true
+OP3: Iterate through loop 2, iterations depend on the number of elements in the current row.
+OP4: Make the comparison of the element to 0; break out of loop if element!=0;
+OP5: Check to see if all elements in the current row are 0.
+OP6: Output true or false depending on wether or not there exists an empty row in this 2D array.
+
+Count the operations:
+OP1: (approximately) 2
+OP2: Best case:1 (the first row is empty) worst case: N (none of the rows are empty)
+OP3: N (elements in the current row)
+OP4: Best case: 1 (the first element in this row != 0) worst case: N (all of elements in the current row)
+OP5: 1
+OP6: 1
+
+Best Case, Worst Case, and Efficiency:
+
+Best Case: 2+1+N+N+2= 2N + 5
+Worst Case: 2 + n^2 + 3 = N^2 + 5
+
+Find the Asymptotic Notation:
+O(n) = N^2
+// for N< 2 it just so happens that the worst case is better than the best case
+
+
+
+
+
