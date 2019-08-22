@@ -1,0 +1,74 @@
+Test Cases for tokenizer.c
+Anirudh Tunoori netid:at813
+RUID: 165003175
+
+Case 1:
+Input: “”
+Output: nothing
+
+Case 2:
+Input: “      ”
+Output: nothing
+
+Case 3:
+Input: " 0700 1234 3.14159e-10 "
+Output: octal 0700 
+	decimal 1234 
+	float 3.14159e-10 
+
+Case 4:
+Input: " 0x 0X2 000 "
+Output: hexadecimal 0x 
+	hexadecimal 0X2 
+	octal 000 
+
+Case 5:
+Input: " 324 423 234 122 -23“
+Output: decimal 324 
+	decimal 423 
+	decimal 234 
+	decimal 122 
+	decimal -23
+————————————————————————————————
+Case 6:
+Input: " agh 1o9 sin -3.4 “
+Output: Error: invalid agh 
+	Error: invalid 1o9 
+	Error: invalid sin 
+	float -3.4 
+
+Case 7:
+Input: " 1..9 ..002 hello 23. \n 123p123“
+Output: Error: invalid 1..9 
+	Error: invalid ..002 
+	Error: invalid hello 
+	float 23. 
+	Error: \n [0x0a]
+	Error: invalid 123p123
+
+Case 8:
+Input: " qwerty9 442688.6e-11 32938.. _ 22e-2 +6 “
+Output: Error: invalid qwerty9 
+	float 442688.6e-11 
+	Error: invalid 32938.. 
+	Error: invalid _ 
+	float 22e-2 
+	Error: invalid +6 
+
+Case 9:Input: " \a \v \r \v \f \n\c\\ ’” 4“ “
+Output: Error: \a [0x07]
+	Error: \v [0x0b]
+	Error: \r [0x0d]
+	Error: \v [0x0b]
+	Error: \f [0x0c]
+	Error: \n\c\ [0x0a]
+	Error: invalid ’” 
+	Error: invalid 4“ 
+
+Case 10:
+Input: " 432b 0x01 0045“
+Output:Error: invalid 432b 
+	hexadecimal 0x01 
+	octal 0045 
+
+
